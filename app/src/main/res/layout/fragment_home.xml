@@ -89,7 +89,151 @@
 
                 <SeekBar
                     android:id="@+id/seekBarCrickets"
-                    style="@style/VolumeBar"/>
+                    style="@style/VolumeBar" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowBeach"
+                style = "@style/TableRowStyle">
+
+                <ImageView
+                    android:id="@+id/imageViewBeach"
+                    android:contentDescription="@string/text_beach"
+                    android:src="@drawable/ic_baseline_beach_access_24"
+                    app:tint="@color/orange_500"
+                    style="@style/AppIconStyle" />
+
+                <TextView
+                    android:id="@+id/textViewBeach"
+                    android:text="@string/text_beach"
+                    style="@style/SoundTitleText" />
+
+                <ImageButton
+                    android:id="@+id/buttonPlayBeach"
+                    android:contentDescription="@string/text_play_button"
+                    android:onClick="controlPlayback"
+                    android:src="@drawable/ic_baseline_play_circle_filled_24"
+                    app:tint="@color/orange_500"
+                    style="@style/PlayButtonStyle" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowBeachVolume"
+                android:gravity="center">
+
+                <SeekBar
+                    android:id="@+id/seekBarBeach"
+                    style="@style/VolumeBar" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowCity"
+                style = "@style/TableRowStyle">
+
+                <ImageView
+                    android:id="@+id/imageViewCiry"
+                    android:contentDescription="@string/text_city"
+                    android:src="@drawable/ic_baseline_location_city_24"
+                    app:tint="@color/orange_500"
+                    style="@style/AppIconStyle" />
+
+                <TextView
+                    android:id="@+id/textViewCity"
+                    android:text="@string/text_city"
+                    style="@style/SoundTitleText" />
+
+                <ImageButton
+                    android:id="@+id/buttonPlayCity"
+                    android:contentDescription="@string/text_play_button"
+                    android:onClick="controlPlayback"
+                    android:src="@drawable/ic_baseline_play_circle_filled_24"
+                    app:tint="@color/orange_500"
+                    style="@style/PlayButtonStyle" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowCityVolume"
+                android:gravity="center">
+
+                <SeekBar
+                    android:id="@+id/seekBarCity"
+                    style="@style/VolumeBar" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowRestaurant"
+                style = "@style/TableRowStyle">
+
+                <ImageView
+                    android:id="@+id/imageViewRestaurant"
+                    android:contentDescription="@string/text_restaurant"
+                    android:src="@drawable/ic_baseline_restaurant_24"
+                    app:tint="@color/orange_500"
+                    style="@style/AppIconStyle" />
+
+                <TextView
+                    android:id="@+id/textViewRestaurant"
+                    android:text="@string/text_restaurant"
+                    style="@style/SoundTitleText" />
+
+                <ImageButton
+                    android:id="@+id/buttonPlayRestaurant"
+                    android:contentDescription="@string/text_play_button"
+                    android:onClick="controlPlayback"
+                    android:src="@drawable/ic_baseline_play_circle_filled_24"
+                    app:tint="@color/orange_500"
+                    style="@style/PlayButtonStyle" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowRestaurantVolume"
+                android:gravity="center">
+
+                <SeekBar
+                    android:id="@+id/seekBarRestaurant"
+                    style="@style/VolumeBar" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowNoise"
+                style = "@style/TableRowStyle">
+
+                <ImageView
+                    android:id="@+id/imageViewNoise"
+                    android:contentDescription="@string/text_white_noise"
+                    android:src="@drawable/ic_baseline_radio_24"
+                    app:tint="@color/orange_500"
+                    style="@style/AppIconStyle" />
+
+                <TextView
+                    android:id="@+id/textViewNoise"
+                    android:text="@string/text_white_noise"
+                    style="@style/SoundTitleText" />
+
+                <ImageButton
+                    android:id="@+id/buttonPlayNoise"
+                    android:contentDescription="@string/text_play_button"
+                    android:onClick="controlPlayback"
+                    android:src="@drawable/ic_baseline_play_circle_filled_24"
+                    app:tint="@color/orange_500"
+                    style="@style/PlayButtonStyle" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/RowNoiseVolume"
+                android:gravity="center">
+
+                <SeekBar
+                    android:id="@+id/seekBarNoise"
+                    style="@style/VolumeBar" />
 
             </TableRow>
         </TableLayout>

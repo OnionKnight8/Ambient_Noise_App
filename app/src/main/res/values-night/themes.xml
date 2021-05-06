@@ -50,7 +50,8 @@
     <style name="VolumeBar" parent="Widget.AppCompat.SeekBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dip</item>
-        <item name="android:progress">50</item>
+        <item name="android:progress">5</item>
         <item name="android:gravity">center</item>
+        <item name="android:max">10</item>
     </style>
 </resources>
