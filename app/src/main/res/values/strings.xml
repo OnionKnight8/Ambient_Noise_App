@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Ambient Noise App</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_alarm">Alarm</string>
+    <string name="title_notes">Notes</string>
+    <string name="title_settings">Settings</string>
+    <string name="text_beach">Beach</string>
+    <string name="text_city">Cityscape</string>
+    <string name="text_crickets">Crickets</string>
+    <string name="text_restaurant">Restaurant</string>
+    <string name="text_thunderstorm">Thunderstorm</string>
+    <string name="text_white_noise">White Noise</string>
+    <string name="text_play_button">Play Button</string>
+    <string name="text_light_mode">Light Mode</string>
+    <string name="text_dark_mode">Dark Mode</string>
+    <string name="text_mode">Switch Themes</string>
+    <string name="NULL"></string>
+    <string name="button_stop">Stop All Sounds</string>
+    <string name="button_credits">Credits</string>
+</resources>

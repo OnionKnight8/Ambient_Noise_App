@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PRIMARY COLOR PALETTE -->
+    <color name="orange_500">#FF9800</color>
+    <color name="orange_light">#FFC947</color>
+    <color name="orange_dark">#C66900</color>
+
+    <!-- SECONDARY COLOR PALETTE -->
+    <color name="blue_700">#344955</color>
+    <color name="blue_light">#5F7481</color>
+    <color name="blue_dark">#0B222C</color>FF9800
+
+    <!-- DARK THEME -->
+    <color name="dark_theme">#121212</color>
+    <color name="dark_theme_light">#383838</color>
+
+    <!-- LIGHT THEME -->
+    <color name="light_theme">#FAFAFA</color>
+    <color name="light_theme_dark">#C7C7C7</color>
+
+    <!-- TEXT COLORS -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
