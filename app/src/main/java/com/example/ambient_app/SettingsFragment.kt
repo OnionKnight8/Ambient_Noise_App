@@ -38,7 +38,9 @@ class SettingsFragment : Fragment() {
     }
 
     // Handler for image button, handled is MainActivity
-    fun swapTheme() {}
+    fun swapTheme(view: View) {}
+    // Stop all sounds, handled in main
+    fun stopAllCall(view: View) {}
 
     // Swap button and text view display based on current mode
     private fun changeButton() {

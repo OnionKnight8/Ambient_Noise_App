@@ -1,16 +1,21 @@
 package com.example.ambient_app
 
-import android.app.Activity
-import android.media.MediaPlayer
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.SeekBar
-import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class HomeFragment : Fragment() {
 
@@ -21,6 +26,7 @@ class HomeFragment : Fragment() {
     // View Model
     private val model: FragmentViewModel by activityViewModels()
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,66 +76,66 @@ class HomeFragment : Fragment() {
         // Set Volume Controllers
         var seekBar: SeekBar = view.findViewById(R.id.seekBarRain)
         val thisActivity = activity as MainActivity
-        seekBar.progress = model.rainVolume
+        seekBar.setProgress(model.rainVolume, true)
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                model.rainVolume = progress
-                thisActivity.controlVolume(view.findViewById(R.id.seekBarRain))}
+                thisActivity.controlVolume(view.findViewById(R.id.seekBarRain))
+                model.rainVolume = progress}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarRain))}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarRain))}
         })
         seekBar = view.findViewById(R.id.seekBarCrickets)
-        seekBar.progress = model.cricketsVolume
+        seekBar.setProgress(model.cricketsVolume, true)
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                model.cricketsVolume = progress
-                thisActivity.controlVolume(view.findViewById(R.id.seekBarCrickets))}
+                thisActivity.controlVolume(view.findViewById(R.id.seekBarCrickets))
+                model.cricketsVolume = progress}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarCrickets))}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarCrickets))}
         })
         seekBar = view.findViewById(R.id.seekBarBeach)
-        seekBar.progress = model.beachVolume
+        seekBar.setProgress(model.beachVolume, true)
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                model.beachVolume = progress
-                thisActivity.controlVolume(view.findViewById(R.id.seekBarBeach))}
+                thisActivity.controlVolume(view.findViewById(R.id.seekBarBeach))
+                model.beachVolume = progress}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarBeach))}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarBeach))}
         })
         seekBar = view.findViewById(R.id.seekBarCity)
-        seekBar.progress = model.cityVolume
+        seekBar.setProgress(model.cityVolume, true)
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                model.cityVolume = progress
-                thisActivity.controlVolume(view.findViewById(R.id.seekBarCity))}
+                thisActivity.controlVolume(view.findViewById(R.id.seekBarCity))
+                model.cityVolume = progress}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarCity))}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarCity))}
         })
         seekBar = view.findViewById(R.id.seekBarRestaurant)
-        seekBar.progress = model.restaurantVolume
+        seekBar.setProgress(model.restaurantVolume, true)
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                model.restaurantVolume = progress
-                thisActivity.controlVolume(view.findViewById(R.id.seekBarRestaurant))}
+                thisActivity.controlVolume(view.findViewById(R.id.seekBarRestaurant))
+                model.restaurantVolume = progress}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarRestaurant))}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarRestaurant))}
         })
         seekBar = view.findViewById(R.id.seekBarNoise)
-        seekBar.progress = model.noiseVolume
+        seekBar.setProgress(model.noiseVolume, true)
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                model.noiseVolume = progress
-                thisActivity.controlVolume(view.findViewById(R.id.seekBarNoise))}
+                thisActivity.controlVolume(view.findViewById(R.id.seekBarNoise))
+                model.noiseVolume = progress}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 thisActivity.controlVolume(view.findViewById(R.id.seekBarNoise))}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {

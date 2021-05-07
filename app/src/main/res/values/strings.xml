@@ -15,7 +15,11 @@
     <string name="text_light_mode">Light Mode</string>
     <string name="text_dark_mode">Dark Mode</string>
     <string name="text_mode">Switch Themes</string>
-    <string name="NULL"></string>
+    <string name="NULL"> </string>
     <string name="button_stop">Stop All Sounds</string>
     <string name="button_credits">Credits</string>
+    <string name="button_add">Add New</string>
+    <string name="hint_name">Name</string>
+    <string name="toast_empty">Name Cannot be Empty!</string>
+    <string name="toast_no_sound">There are no Sounds Playing!</string>
 </resources>
