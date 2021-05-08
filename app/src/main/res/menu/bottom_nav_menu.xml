@@ -17,11 +17,6 @@
         android:title="@string/title_alarm" />
 
     <item
-        android:id="@+id/navigation_notes"
-        android:icon="@drawable/ic_baseline_notes_24"
-        android:title="@string/title_notes" />
-
-    <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/title_settings" />

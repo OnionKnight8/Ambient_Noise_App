@@ -13,6 +13,10 @@ class FavoritesViewModel(private val favoritesRepository: FavoritesRepository) :
     fun delete(favoritesEntry: FavoritesEntry) = viewModelScope.launch {
         favoritesRepository.deleteEntry(favoritesEntry)
     }
+
+    fun deleteId(favoritesId: Int) = viewModelScope.launch {
+        favoritesRepository.deleteId(favoritesId)
+    }
 }
 
 class FavoritesViewModelFactory(private val favoritesRepository: FavoritesRepository) : ViewModelProvider.Factory {

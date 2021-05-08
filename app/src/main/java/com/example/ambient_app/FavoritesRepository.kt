@@ -18,4 +18,10 @@ class FavoritesRepository(private val favoritesDAO: FavoritesDAO) {
     suspend fun deleteEntry(favoritesEntry: FavoritesEntry) {
         favoritesDAO.delete(favoritesEntry)
     }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteId(favoritesId: Int) {
+        favoritesDAO.deleteId(favoritesId)
+    }
 }

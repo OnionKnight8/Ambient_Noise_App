@@ -1,8 +1,14 @@
 package com.example.ambient_app
 
 import android.content.*
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
+import android.text.style.BackgroundColorSpan
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -12,12 +18,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.IllegalStateException
 import kotlin.math.ln
 
@@ -34,7 +38,6 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
     private lateinit var homeFragment: HomeFragment
     private lateinit var favoritesFragment: FavoritesFragment
     private lateinit var alarmFragment: AlarmFragment
-    private lateinit var notesFragment: NotesFragment
     private lateinit var settingsFragment: SettingsFragment
 
     // Shared Preferences
@@ -46,6 +49,9 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
     private val viewModel: FavoritesViewModel by viewModels {
         FavoritesViewModelFactory((application as Application).favoritesRepository)
     }
+
+    // Navview
+    private lateinit var navView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,13 +76,12 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView = findViewById(R.id.nav_view)
 
         // Instantiate Fragments
         homeFragment = HomeFragment()
         favoritesFragment = FavoritesFragment()
         alarmFragment = AlarmFragment()
-        notesFragment = NotesFragment()
         settingsFragment = SettingsFragment()
 
         var selectedFragment: Fragment = homeFragment
@@ -84,7 +89,6 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
             "HOME" -> selectedFragment = homeFragment
             "FAVORITES" -> selectedFragment = favoritesFragment
             "ALARM" -> selectedFragment = alarmFragment
-            "NOTES" -> selectedFragment = notesFragment
             "SETTINGS" -> selectedFragment = settingsFragment
         }
 
@@ -101,8 +105,6 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
                 model.currentFragment = "FAVORITES"}
                 R.id.navigation_alarm -> {selectedFragment = alarmFragment
                 model.currentFragment = "ALARM"}
-                R.id.navigation_notes -> {selectedFragment = notesFragment
-                model.currentFragment = "NOTES"}
                 R.id.navigation_settings -> {selectedFragment = settingsFragment
                 model.currentFragment = "SETTINGS"}
             }
@@ -130,9 +132,15 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
         // Register to receive messages from adapter
         val observer = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val content = intent?.getStringArrayListExtra("CONTENT")
-                val volume = intent?.getStringArrayListExtra("VOLUME")
-                playFavorite(content, volume)
+                if(intent?.getStringExtra("ACTION") == "PLAY") {
+                    val content = intent.getStringArrayListExtra("CONTENT")
+                    val volume = intent.getStringArrayListExtra("VOLUME")
+                    playFavorite(content, volume)
+                }
+                else if(intent?.getStringExtra("ACTION") == "DELETE") {
+                    val favoritesId = intent.getIntExtra("ID", -1)
+                    deleteFavorite(favoritesId)
+                }
             }
         }
         LocalBroadcastManager.getInstance(this).registerReceiver(observer,
@@ -488,68 +496,113 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
     override fun applyText(name: String) {
         // Check if text is empty
         if(name.isNotEmpty()) {
-            // Set values
-            var allEmpty = true
+            // Check if text is too long
+            if(name.length <= 30) {
+                // Set values
+                var allEmpty = true
 
-            var rainPlaying = 0
-            var rainVolume = 0
-            if(model.rainPlaying) {
-                rainPlaying = 1
-                rainVolume = model.rainVolume
-                allEmpty = false
-            }
-            var cricketsPlaying = 0
-            var cricketsVolume = 0
-            if(model.cricketsPlaying) {
-                cricketsPlaying = 1
-                cricketsVolume = model.cricketsVolume
-                allEmpty = false
-            }
-            var beachPlaying = 0
-            var beachVolume = 0
-            if(model.beachPlaying) {
-                beachPlaying = 1
-                beachVolume = model.beachVolume
-                allEmpty = false
-            }
-            var cityPlaying = 0
-            var cityVolume = 0
-            if(model.cityPlaying) {
-                cityPlaying = 1
-                cityVolume = model.cityVolume
-                allEmpty = false
-            }
-            var restaurantPlaying = 0
-            var restaurantVolume = 0
-            if(model.restaurantPlaying) {
-                restaurantPlaying = 1
-                restaurantVolume = model.restaurantVolume
-                allEmpty = false
-            }
-            var noisePlaying = 0
-            var noiseVolume = 0
-            if(model.noisePlaying) {
-                noisePlaying = 1
-                noiseVolume = model.noiseVolume
-                allEmpty = false
-            }
-            // Check to make sure at least one sound is playing
-            if(!allEmpty) {
-                val contentList = mutableListOf<String>(rainPlaying.toString(),cricketsPlaying.toString(),
-                        beachPlaying.toString(),cityPlaying.toString(),restaurantPlaying.toString(),
-                        noisePlaying.toString())
-                val volumeList = mutableListOf<String>(rainVolume.toString(),cricketsVolume.toString(),
-                        beachVolume.toString(),cityVolume.toString(),restaurantVolume.toString(),
-                        noiseVolume.toString())
-                val newFavorite = FavoritesEntry(name=name,content=contentList, volume=volumeList)
-                viewModel.insert(newFavorite)
+                var rainPlaying = 0
+                var rainVolume = 0
+                if (model.rainPlaying) {
+                    rainPlaying = 1
+                    rainVolume = model.rainVolume
+                    allEmpty = false
+                }
+                var cricketsPlaying = 0
+                var cricketsVolume = 0
+                if (model.cricketsPlaying) {
+                    cricketsPlaying = 1
+                    cricketsVolume = model.cricketsVolume
+                    allEmpty = false
+                }
+                var beachPlaying = 0
+                var beachVolume = 0
+                if (model.beachPlaying) {
+                    beachPlaying = 1
+                    beachVolume = model.beachVolume
+                    allEmpty = false
+                }
+                var cityPlaying = 0
+                var cityVolume = 0
+                if (model.cityPlaying) {
+                    cityPlaying = 1
+                    cityVolume = model.cityVolume
+                    allEmpty = false
+                }
+                var restaurantPlaying = 0
+                var restaurantVolume = 0
+                if (model.restaurantPlaying) {
+                    restaurantPlaying = 1
+                    restaurantVolume = model.restaurantVolume
+                    allEmpty = false
+                }
+                var noisePlaying = 0
+                var noiseVolume = 0
+                if (model.noisePlaying) {
+                    noisePlaying = 1
+                    noiseVolume = model.noiseVolume
+                    allEmpty = false
+                }
+                // Check to make sure at least one sound is playing
+                if (!allEmpty) {
+                    val contentList = mutableListOf<String>(rainPlaying.toString(), cricketsPlaying.toString(),
+                            beachPlaying.toString(), cityPlaying.toString(), restaurantPlaying.toString(),
+                            noisePlaying.toString())
+                    val volumeList = mutableListOf<String>(rainVolume.toString(), cricketsVolume.toString(),
+                            beachVolume.toString(), cityVolume.toString(), restaurantVolume.toString(),
+                            noiseVolume.toString())
+                    val newFavorite = FavoritesEntry(name = name, content = contentList, volume = volumeList)
+                    viewModel.insert(newFavorite)
+                } else {
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_no_sound), Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this@MainActivity, getString(R.string.toast_no_sound), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, getString(R.string.toast_too_long), Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(this@MainActivity, getString(R.string.toast_empty), Toast.LENGTH_SHORT).show()
         }
     }
+
+    // Delete a favorite from list
+    fun deleteFavorite(id: Int) {
+        if(id != -1) {
+            viewModel.deleteId(id)
+        }
+    }
+
+    // Handle credits button
+    fun viewCredits(view: View) {
+        settingsFragment.viewCredits(view)
+    }
+
+    // Starts timer, disables navbar
+    fun startCountdown(view: View) {
+        navView.menu.getItem(0).isEnabled = false
+        navView.menu.getItem(1).isEnabled = false
+        navView.menu.getItem(2).isEnabled = false
+        navView.menu.getItem(3).isEnabled = false
+        alarmFragment.startCountdown(view)
+    }
+
+    // Pauses timer, enables navbar
+    fun pauseCountdown(view: View) {
+        navView.menu.getItem(0).isEnabled = true
+        navView.menu.getItem(1).isEnabled = true
+        navView.menu.getItem(2).isEnabled = true
+        navView.menu.getItem(2).isEnabled = true
+        alarmFragment.pauseCountdown(view)
+    }
+
+    // Re-enables navbar and stops sounds.
+    fun timerStop() {
+        navView.menu.getItem(0).isEnabled = true
+        navView.menu.getItem(1).isEnabled = true
+        navView.menu.getItem(2).isEnabled = true
+        navView.menu.getItem(2).isEnabled = true
+        stopAll("SAVE")
+    }
+
 
     // Converts seek bar values in volumes
     // NOTE: Due to the way that the MediaPlayer.setVolume() method is handled, the value of the

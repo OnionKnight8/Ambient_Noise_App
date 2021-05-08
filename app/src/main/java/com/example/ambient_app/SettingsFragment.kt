@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 
@@ -41,6 +42,11 @@ class SettingsFragment : Fragment() {
     fun swapTheme(view: View) {}
     // Stop all sounds, handled in main
     fun stopAllCall(view: View) {}
+    // View credits
+    fun viewCredits(view: View) {
+        val creditsDialog = CreditsDialog()
+        creditsDialog.show(requireActivity().supportFragmentManager, getString(R.string.button_credits))
+    }
 
     // Swap button and text view display based on current mode
     private fun changeButton() {

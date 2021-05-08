@@ -7,19 +7,69 @@
     tools:context=".AlarmFragment">
 
     <TextView
-        android:id="@+id/text_settings"
-        android:layout_width="match_parent"
+        android:id="@+id/textTimerTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center_horizontal"
-        android:text="ALARM"
-        android:textAlignment="center"
-        android:textColor="@color/white"
+        android:layout_marginTop="32dp"
+        android:text="@string/title_alarm"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/numberHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTimerTitle"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <NumberPicker
+        android:id="@+id/numberMinute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/numberSecond"
+        app:layout_constraintStart_toEndOf="@+id/numberHour"
+        app:layout_constraintTop_toBottomOf="@+id/textTimerTitle"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <NumberPicker
+        android:id="@+id/numberSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTimerTitle"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/buttonStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startCountdown"
+        android:text="@string/button_start_timer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberMinute" />
+
+    <Button
+        android:id="@+id/buttonPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="pauseCountdown"
+        android:text="@string/button_pause_timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStart" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

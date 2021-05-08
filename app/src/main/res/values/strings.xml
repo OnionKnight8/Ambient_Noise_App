@@ -17,9 +17,27 @@
     <string name="text_mode">Switch Themes</string>
     <string name="NULL"> </string>
     <string name="button_stop">Stop All Sounds</string>
+    <string name="button_start_timer">Start Timer</string>
+    <string name="button_pause_timer">Pause Timer</string>
     <string name="button_credits">Credits</string>
     <string name="button_add">Add New</string>
+    <string name="button_delete">Delete Favorite</string>
     <string name="hint_name">Name</string>
     <string name="toast_empty">Name Cannot be Empty!</string>
+    <string name="toast_too_long">Name is too Long!</string>
     <string name="toast_no_sound">There are no Sounds Playing!</string>
+    <string name="toast_timer_start">Timer has started.</string>
+    <string name="toast_timer_up">Timer Up, Stopping Sounds.</string>
+    <string name="text_credits">
+        App Icon by Chris O\'Brooks ( https://twitter.com/chrisobrooksart )
+
+        This app uses these sounds from freesound:
+        \"Thunder Storm Nonstop Thunder\" by hargissssound ( https://freesound.org/s/390398/ ) licensed under CC0 1.0
+        \"Gentle ocean waves birdsong and gull.WAV\" by jackmichaelking ( https://freesound.org/s/518637/ ) licensed under CC0 1.0
+        \"City Traffic 2.wav\" by inchadney ( https://freesound.org/s/39496/ ) licensed under CCBY 3.0
+        \"WhiteNoiseBinauralShort.mp3\" by michaelomreiki ( https://freesound.org/s/267013/ ) licensed under CC0 1.0
+        \"Fall Field Crickets - 1\" by naturenutt ( https://freesound.org/s/326251/ ) licensed under CCBY 3.0
+        \"MURMULLO RESTAURANT\" by Matias44 ( \"https://freesound.org/s/173920/\" ) licensed under CCBY 3.0
+
+        All Icons inside app from \"material-design-icons\" by google ( \"https://github.com/google/material-design-icons\" ) licensed under Apache License 2.0</string>
 </resources>
