@@ -99,6 +99,9 @@ class AlarmFragment : Fragment() {
             }
             else {
                 timerThreadRunning = false
+                hours.isEnabled = true
+                minutes.isEnabled = true
+                seconds.isEnabled = true
                 Toast.makeText(context, getString(R.string.toast_timer_up), Toast.LENGTH_LONG).show()
                 val act = activity as MainActivity
                 act.timerStop()

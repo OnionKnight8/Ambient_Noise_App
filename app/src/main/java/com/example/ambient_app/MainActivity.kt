@@ -590,7 +590,7 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
         navView.menu.getItem(0).isEnabled = true
         navView.menu.getItem(1).isEnabled = true
         navView.menu.getItem(2).isEnabled = true
-        navView.menu.getItem(2).isEnabled = true
+        navView.menu.getItem(3).isEnabled = true
         alarmFragment.pauseCountdown(view)
     }
 
@@ -599,7 +599,7 @@ class MainActivity : AppCompatActivity(), AddDialog.DialogListener{
         navView.menu.getItem(0).isEnabled = true
         navView.menu.getItem(1).isEnabled = true
         navView.menu.getItem(2).isEnabled = true
-        navView.menu.getItem(2).isEnabled = true
+        navView.menu.getItem(3).isEnabled = true
         stopAll("SAVE")
     }
 
